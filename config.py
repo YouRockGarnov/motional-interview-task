@@ -9,6 +9,10 @@ load_dotenv()
 class Config(object):
     DEBUG = True
     TESTING = False
+    API_TITLE = 'Motion Taxi Task API'
+    API_VERSION = 'v1'
+    OPENAPI_VERSION = '3.0.2'
+    OPENAPI_JSON_PATH = "api-spec.json"
 
 
 class ProductionConfig(Config):
