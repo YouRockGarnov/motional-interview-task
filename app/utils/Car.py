@@ -35,3 +35,6 @@ class Car:
 
             else:
                 self._location.y += 1 if self._destination.y > self._location.y else -1
+
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__

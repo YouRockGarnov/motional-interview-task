@@ -1,0 +1,150 @@
+{
+  "paths": {
+    "/api/book": {
+      "post": {
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookJson"
+              }
+            }
+          }
+        },
+        "summary": "Pick the nearest available car to the customer location and return the total time taken to travel\nfrom the current car location to customer location then to customer destination.",
+        "tags": [
+          "Bookings"
+        ]
+      }
+    },
+    "/api/tick": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "Advance the service time stamp by 1 time unit.",
+        "tags": [
+          "Bookings"
+        ]
+      }
+    },
+    "/api/reset": {
+      "put": {
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "Will reset all cars data back to the initial state regardless of cars that are currently booked.",
+        "tags": [
+          "Bookings"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Motion Taxi Task API",
+    "version": "v1"
+  },
+  "tags": [
+    {
+      "name": "Bookings",
+      "description": ""
+    }
+  ],
+  "openapi": "3.0.2",
+  "components": {
+    "schemas": {
+      "Point": {
+        "type": "object",
+        "properties": {
+          "y": {
+            "type": "integer"
+          },
+          "x": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "x",
+          "y"
+        ]
+      },
+      "BookJson": {
+        "type": "object",
+        "properties": {
+          "destination": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Point"
+          }
+        },
+        "required": [
+          "destination",
+          "source"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Error name"
+          },
+          "errors": {
+            "type": "object",
+            "description": "Errors"
+          },
+          "code": {
+            "type": "integer",
+            "description": "Error code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          }
+        }
+      }
+    },
+    "responses": {
+      "UNPROCESSABLE_ENTITY": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "DEFAULT_ERROR": {
+        "description": "Default error response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}

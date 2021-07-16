@@ -5,6 +5,7 @@ from itertools import filterfalse
 from math import inf
 
 
+# singleton for operations with cars
 class CarManager:
     _initial_cars_state = dict([(i, Car(i, Point(0, 0))) for i in range(1, 4)])
     _cars = deepcopy(_initial_cars_state)

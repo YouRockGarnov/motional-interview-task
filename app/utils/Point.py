@@ -26,3 +26,6 @@ class Point:
 
     def __abs__(self):
         return abs(self._x) + abs(self._y)
+
+    def __eq__(self, other):
+        return self._x == other.x and self._y == other.y
